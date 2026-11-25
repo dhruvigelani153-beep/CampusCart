@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusCart | Online Stationery Store</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h2 onclick="showPage('home')">🎓 CampusCart</h2>
+  <nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('products')">Products</button>
+    <button onclick="showPage('wishlist')">❤️ Wishlist</button>
+    <button onclick="showPage('cart')">🛒 Cart (<span id="cartCount">0</span>)</button>
+    <button onclick="showPage('history')">📦 Orders</button>
+    <span id="userArea"></span>
+  </nav>
+</header>
+
+<div class="navigation">
+  <button class="back-btn" onclick="goBack()">← Back</button>
+  <button class="back-btn" onclick="showPage('home')">⌂ Home</button>
+</div>
+
+<p id="message"></p>
+
+<section id="login" class="page">
+  <div class="form-box">
+    <h2>Welcome to CampusCart 🎓</h2>
+    <p>Login to explore your favourite stationery.</p>
+    <input id="studentName" placeholder="Your Name">
+    <input id="studentEmail" type="email" placeholder="Email Address">
+    <button onclick="login()">Login / Register</button>
+    <p id="loginMessage"></p>
+  </div>
+</section>
+
+<section id="home" class="page">
+  <div class="hero">
+    <div>
+      <span class="tag">WELCOME TO CAMPUSCART</span>
+      <h1>Everything You Need,<br>All in One Place!</h1>
+      <p>Make your student life smarter with amazing stationery.</p>
+      <button onclick="showPage('products')">Shop Now →</button>
+    </div>
+    <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=700" alt="Study desk">
+  </div>
+
+  <div class="offer-banner">
+    <div>
+      <p>🎉 EXCLUSIVE WELCOME OFFER</p>
+      <h1>GET ₹20 OFF</h1>
+      <p>For first-time users on shopping above ₹99.</p>
+      <button onclick="showPage('products')">Shop Now →</button>
+    </div>
+    <div class="offer-circle">₹20<br>OFF</div>
+  </div>
+
+  <h2 class="heading">✨ New Arrivals</h2>
+  <p class="center">Fresh stationery picks for students.</p>
+  <div id="newProducts" class="products"></div>
+  <div class="center">
+    <button onclick="showPage('products')">View All Products →</button>
+  </div>
+
+  <h2 class="heading">🎨 New Collection</h2>
+  <p class="center">Choose your favourite collection.</p>
+  <div class="collection-grid">
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500" alt="Art supplies">
+      <h3>Art & Creativity</h3>
+      <button onclick="showPage('products')">Explore</button>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=500" alt="Notebooks">
+      <h3>Study Essentials</h3>
+      <button onclick="showPage('products')">Explore</button>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=500" alt="Writing supplies">
+      <h3>Writing Collection</h3>
+      <button onclick="showPage('products')">Explore</button>
+    </div>
+  </div>
+</section>
+
+<section id="products" class="page">
+  <h2 class="heading">Explore Our Products</h2>
+  <input id="search" placeholder="Search stationery..." oninput="searchProducts()">
+  <div id="productList" class="products"></div>
+</section>
+
+<section id="wishlist" class="page">
+  <h2 class="heading">❤️ My Wishlist</h2>
+  <div id="wishlistItems" class="products"></div>
+</section>
+
+<section id="cart" class="page">
+  <h2 class="heading">🛒 My Shopping Cart</h2>
+  <div id="cartItems"></div>
+  <div class="summary">
+    <h2>Total: ₹<span id="total">0</span></h2>
+    <button onclick="showPage('checkout')">Proceed to Checkout →</button>
+  </div>
+</section>
+
+<section id="checkout" class="page">
+  <div class="form-box">
+    <h2>Checkout & Payment</h2>
+    <p>Subtotal: ₹<span id="checkoutSubtotal">0</span></p>
+    <p class="discount-line">First Order Discount: -₹<span id="discount">0</span></p>
+    <h2>Final Total: ₹<span id="checkoutTotal">0</span></h2>
+
+    <input id="customerName" placeholder="Full Name">
+    <input id="customerPhone" placeholder="Mobile Number">
+    <textarea id="customerAddress" placeholder="Delivery Address"></textarea>
+
+    <h3>Select Payment Method</h3>
+    <select id="paymentMethod">
+      <option value="Cash on Delivery">Cash on Delivery</option>
+      <option value="UPI (Demo)">UPI (Demo)</option>
+      <option value="Card (Demo)">Debit / Credit Card (Demo)</option>
+    </select>
+
+    <p class="small-note">Demo payment only. No real money will be charged.</p>
+    <button onclick="placeOrder()">Place Order</button>
+  </div>
+</section>
+
+<section id="success" class="page center">
+  <h1>🎉 Order Confirmed!</h1>
+  <p>Your order has been placed successfully.</p>
+  <h2 id="deliveryETA">🚚 Arriving in 10–15 minutes</h2>
+  <button onclick="showPage('history')">Track My Order</button>
+  <button onclick="showPage('products')">Continue Shopping</button>
+</section>
+
+<section id="history" class="page">
+  <h2 class="heading">📦 My Order History</h2>
+  <div id="orderList"></div>
+</section>
+
+<footer>
+  <h2>CampusCart 🎓</h2>
+  <p>Making Student Shopping Simple & Easy.</p>
+  <p>© 2026 CampusCart. All Rights Reserved.</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
